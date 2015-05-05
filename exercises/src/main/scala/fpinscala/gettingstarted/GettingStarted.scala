@@ -15,8 +15,8 @@ object MyModule {
 
   def main(args: Array[String]): Unit = {
     println(formatAbs(-42))
-    println(formatResult("Fib", 9, fib))
-    println(formatResult("Fib (tail)", 9, fibtail))
+    println(formatResult("Fib", 4, fib))
+    println(formatResult("Fib (tail)", 4, fibtail))
   }
 
   // A definition of factorial, using a local, tail recursive function
@@ -42,6 +42,7 @@ object MyModule {
   def fib(n: Int): Int = {
     @annotation.tailrec
     def go(i: Int, prev: Int, curr: Int): Int = {
+      println(s"---> go called with $i, $prev, $curr")
       if (i == 0) prev
       else go(i - 1, curr, prev + curr)
     }
@@ -51,6 +52,7 @@ object MyModule {
   def fibtail(n: Int): Int = {
     //@annotation.tailrec
     def go(i: Int): Int = {
+      println(s"---> go() called with $i")
       if (i == 0 || i == 1) i
       else go(i - 1) + go(i - 2)
     }
