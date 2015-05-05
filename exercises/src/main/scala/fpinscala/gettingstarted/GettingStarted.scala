@@ -166,8 +166,8 @@ object PolymorphicFunctions {
     @annotation.tailrec
     def go(i: Int): Boolean = {
       if (i >= as.length - 1) true
-      else if (!gt(as(i), as(i+1))) false
-      else go(i+1)
+      else if (gt(as(i), as(i+1))) go(i + 1)
+      else false
     }
     go(0)
   }
