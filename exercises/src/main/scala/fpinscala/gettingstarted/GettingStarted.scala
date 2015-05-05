@@ -205,8 +205,7 @@ object PolymorphicFunctions {
 
   // Exercise 5: Implement `compose`
 
-  def compose[A,B,C](f: B => C, g: A => B): A => C =
-    ???
+  def compose[A,B,C](f: B => C, g: A => B): A => C = a => f(g(a))
 
   def main(args: Array[String]): Unit = {
     println(isSorted(Array(1,2,4,5,6,6), (a: Int, b: Int) => a <= b))
