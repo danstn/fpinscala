@@ -188,8 +188,10 @@ object PolymorphicFunctions {
   // NB: The `Function2` trait has a `curried` method already
 
   // Exercise 4: Implement `uncurry`
-  def uncurry[A,B,C](f: A => B => C): (A, B) => C =
-    ???
+  def uncurry[A,B,C](f: A => B => C): (A, B) => C = (a, b) => f(a)(b)
+  def uncurryV[A,B,C](f: A => B => C): (A, B) => C = (a: A, b: B) => f(a)(b)
+  // Note: f(a) returns a function B => C, so we can just call the returned function
+  // as follows: f(a)(b) given the b is included in the environment of the body of uncurry
 
   /*
   NB: There is a method on the `Function` object in the standard library,
