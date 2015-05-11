@@ -67,8 +67,8 @@ object List { // `List` companion object. Contains functions for creating and wo
     }
   }
 
-  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = l match {
-    case Cons(h, t) if f(h) => dropWhile(t, f)
+  def dropWhile[A](l: List[A])(f: A => Boolean): List[A] = l match {
+    case Cons(h, t) if f(h) => dropWhile(t)(f)
     case _ => l
   }
 
