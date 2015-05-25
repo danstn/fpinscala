@@ -46,8 +46,14 @@ object List { // `List` companion object. Contains functions for creating and wo
   def sum2(ns: List[Int]) =
     foldRight(ns, 0)((x,y) => x + y)
 
+  def sum3(l: List[Int]) =
+    foldLeft(l, 0)(_ + _)
+
   def product2(ns: List[Double]) =
     foldRight(ns, 1.0)(_ * _) // `_ * _` is more concise notation for `(x,y) => x * y`; see sidebar
+
+  def product3(l: List[Double]) =
+    foldLeft(l, 1.0)(_ * _)
 
   def tail[A](l: List[A]): List[A] = l match {
     case Nil => Nil
@@ -78,9 +84,22 @@ object List { // `List` companion object. Contains functions for creating and wo
     case Cons(h, t) => Cons(h, init(t))
   }
 
-  def length[A](l: List[A]): Int = sys.error("todo")
+  def length[A](l: List[A]): Int = l match {
+    case Nil => 0
+    case Cons(h, t) => length(t) + 1
+  }
 
-  def foldLeft[A,B](l: List[A], z: B)(f: (B, A) => B): B = sys.error("todo")
+  def length2[A](l: List[A]): Int = 
+    foldRight(l, 0)((a, b) => b + 1)
+
+  def length3[A](l: List[A]): Int = 
+    foldLeft(l, 0)((a, b) => a + 1)
+
+  @annotation.tailrec
+  def foldLeft[A,B](l: List[A], z: B)(f: (B, A) => B): B = l match {
+    case Nil => z
+    case Cons(h, t) => foldLeft(t, f(z, h))(f)
+  }
 
   def map[A,B](l: List[A])(f: A => B): List[B] = sys.error("todo")
 }
